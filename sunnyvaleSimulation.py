@@ -1,9 +1,12 @@
 import numpy as np
-from numpy import random
-import pandas as pd
+import csv
 
 turnoverMean = 47.08064516
 turnoverSD = 14.98556506
+
+# set up csv
+file = open("sunnyvaleResults.csv", "a")
+writer = csv.writer(file)
 
 # single family to two unit
 for twoUnitPercentage in np.arange(0, 1, 0.01):
@@ -40,3 +43,8 @@ for twoUnitPercentage in np.arange(0, 1, 0.01):
             housingShortageCoefficient = 16335 - averageNewUnits
 
             # write data to csv
+            open('sunnyvaleResults.csv')
+            writer.writerow([singleFamilyPercentage, twoUnitPercentage, threeUnitPercentage, fourUnitPercentage, housingShortageCoefficient])
+
+# close sunnyvale results
+file.close()
