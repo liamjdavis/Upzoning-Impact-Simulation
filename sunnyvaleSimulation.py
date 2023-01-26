@@ -4,10 +4,6 @@ import csv
 turnoverMean = 47.08064516
 turnoverSD = 14.98556506
 
-# set up csv
-file = open("sunnyvaleResults.csv", "a")
-writer = csv.writer(file)
-
 # single family to two unit
 for twoUnitPercentage in np.arange(0, 1, 0.01):
     # single family to three unit
@@ -43,8 +39,7 @@ for twoUnitPercentage in np.arange(0, 1, 0.01):
             housingShortageCoefficient = 16335 - averageNewUnits
 
             # write data to csv
-            open('sunnyvaleResults.csv')
-            writer.writerow([singleFamilyPercentage, twoUnitPercentage, threeUnitPercentage, fourUnitPercentage, housingShortageCoefficient])
-
-# close sunnyvale results
-file.close()
+            f = open("sunnyvaleResults.csv", "a", newLine = "")
+            writer = csv.writer(f)
+            writer.writerow(singleFamilyPercentage, twoUnitPercentage, threeUnitPercentage, fourUnitPercentage, housingShortageCoefficient)
+            f.close
