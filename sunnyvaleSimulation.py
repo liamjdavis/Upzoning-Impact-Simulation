@@ -5,11 +5,15 @@ turnoverMean = 47.08064516
 turnoverSD = 14.98556506
 
 # single family to two unit
-for twoUnitPercentage in np.arange(0, 1, 0.01):
+for i in np.arange(0, 1, 0.01):
     # single family to three unit
-    for threeUnitPercentage in np.arange(0, 1 - twoUnitPercentage, 0.01):
+    for j in np.arange(0, 1 - i, 0.01):
         # single family to four unit
-        for fourUnitPercentage in np.arange(0, 1 - twoUnitPercentage - threeUnitPercentage, 0.01):
+        for k in np.arange(0, 1 - i - j, 0.01):
+            twoUnitPercentage = round(i, 2)
+            threeUnitPercentage = round(j, 2)
+            fourUnitPercentage = round(k, 2)
+
             singleFamilyPercentage = 1 - twoUnitPercentage - threeUnitPercentage - fourUnitPercentage
             totalNewUnits = 0
 
@@ -36,10 +40,12 @@ for twoUnitPercentage in np.arange(0, 1, 0.01):
             averageNewUnits = totalNewUnits / 10000
 
             # calculate number of new units short of job growth
-            housingShortageCoefficient = 16335 - averageNewUnits
+            housingShortageCoefficient = round(16335 - averageNewUnits)
 
-            # write data to csv
-            f = open("sunnyvaleResults.csv", "a", newLine = "")
-            writer = csv.writer(f)
-            writer.writerow(singleFamilyPercentage, twoUnitPercentage, threeUnitPercentage, fourUnitPercentage, housingShortageCoefficient)
-            f.close
+            # write to csv
+            file = open("sunnyvaleResults.csv", "a")
+
+            writer = csv.writer(file)
+            writer.writerow([str(singleFamilyPercentage), str(twoUnitPercentage), str(threeUnitPercentage), str(fourUnitPercentage), str(housingShortageCoefficient)])
+
+            file.close()
